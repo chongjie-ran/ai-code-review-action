@@ -1,5 +1,5 @@
-# Example: Using CodeLens GitHub Action (recommended)
-# Just add this to your project's .github/workflows/
+# Example: Using CodeLens GitHub Action
+# Add this to your project's .github/workflows/
 
 name: CodeLens AI Code Review
 
@@ -26,3 +26,4 @@ jobs:
           codelens-api-url: https://api.codelens.ai  # or your self-hosted URL
           fail-on-high: true
           min-score: 70
+          pr-number: ${{ github.event.pull_request.number }}

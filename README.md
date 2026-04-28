@@ -43,9 +43,10 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           codelens-api-key: ${{ secrets.CODELENS_API_KEY }}
-          codelens-api-url: https://api.codelens.ai  # optional, or your self-hosted URL
+          codelens-api-url: https://api.codelens.ai  # or your self-hosted URL
           fail-on-high: true
           min-score: 70
+          pr-number: ${{ github.event.pull_request.number }}
 ```
 
 ### 3. Add Secrets
@@ -82,6 +83,7 @@ If you're running your own CodeLens backend:
 | `codelens-api-url` | CodeLens backend URL | `https://api.codelens.ai` |
 | `fail-on-high` | Fail workflow on high-severity | `false` |
 | `min-score` | Minimum quality score (0-100) | `0` |
+| `pr-number` | PR number to review | auto-detected |
 
 ## Output
 

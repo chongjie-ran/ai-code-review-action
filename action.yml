@@ -24,13 +24,19 @@ inputs:
     description: "Fail workflow if high-severity issues found"
     required: false
     default: "false"
+  pr-number:
+    description: "PR number to review (auto-detected from pull_request event)"
+    required: false
+    default: ""
 
 runs:
   using: "docker"
   image: "docker://ghcr.io/chongjie-ran/ai-code-review-action:v1.1"
-  env:
-    GITHUB_TOKEN: ${{ inputs.github-token }}
-    CODELENS_API_KEY: ${{ inputs.codelens-api-key }}
-    CODELENS_API_URL: ${{ inputs.codelens-api-url }}
-    MIN_SCORE: ${{ inputs.min-score }}
-    FAIL_ON_HIGH: ${{ inputs.fail-on-high }}
+  args:
+    - ${{ inputs.github-token }}
+    - ${{ inputs.codelens-api-key }}
+    - ${{ inputs.codelens-api-url }}
+    - ${{ inputs.min-score }}
+    - ${{ inputs.pr-number }}
+    - ${{ inputs.fail-on-high }}
+
