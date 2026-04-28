@@ -27,10 +27,10 @@ inputs:
 
 runs:
   using: "docker"
-  image: "Dockerfile"
-  args:
-    - ${{ inputs.github-token }}
-    - ${{ inputs.codelens-api-key }}
-    - ${{ inputs.codelens-api-url }}
-    - ${{ inputs.min-score }}
-    - ${{ inputs.fail-on-high }}
+  image: "docker://ghcr.io/chongjie-ran/ai-code-review-action:v1.1"
+  env:
+    GITHUB_TOKEN: ${{ inputs.github-token }}
+    CODELENS_API_KEY: ${{ inputs.codelens-api-key }}
+    CODELENS_API_URL: ${{ inputs.codelens-api-url }}
+    MIN_SCORE: ${{ inputs.min-score }}
+    FAIL_ON_HIGH: ${{ inputs.fail-on-high }}

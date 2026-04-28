@@ -178,16 +178,20 @@ def main():
     head_sha = os.environ.get("GITHUB_SHA", "")
     base_branch = os.environ.get("GITHUB_BASE_REF", "main")
 
-    # Also accept as positional args from action.yml
-    if len(sys.argv) > 1:
+    # Also accept as positional args (for Dockerfile-based runs without env vars)
+    if len(sys.argv) > 1 and sys.argv[1]:
         github_token = sys.argv[1]
-    if len(sys.argv) > 2:
+    if len(sys.argv) > 2 and sys.argv[2]:
         api_key = sys.argv[2]
-    if len(sys.argv) > 3:
+    if len(sys.argv) > 3 and sys.argv[3]:
         api_url = sys.argv[3].rstrip("/")
-    if len(sys.argv) > 4:
+    if len(sys.argv) > 4 and sys.argv[4]:
         min_score = int(sys.argv[4])
-    if len(sys.argv) > 6:
+    if len(sys.argv) > 5 and sys.argv[5]:
+        pr_number_override = int(sys.argv[5])
+        if pr_number_override > 0:
+            pr_number = pr_number_override
+    if len(sys.argv) > 6 and sys.argv[6]:
         fail_on_high = sys.argv[6].lower() == "true"
 
     print(f"CodeLens AI Action starting...")
