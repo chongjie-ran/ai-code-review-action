@@ -1,0 +1,36 @@
+name: "CodeLens AI Code Review"
+description: "AI-powered code review for your PRs. Detects security vulnerabilities, logic errors, and tech debt."
+author: "chongjie-ran"
+branding:
+  icon: "shield-check"
+  color: "green"
+
+inputs:
+  github-token:
+    description: "GitHub token for API access (use ${{ secrets.GITHUB_TOKEN }})"
+    required: true
+  codelens-api-key:
+    description: "Your CodeLens API key"
+    required: true
+  codelens-api-url:
+    description: "CodeLens backend API URL"
+    required: false
+    default: "https://api.codelens.ai"
+  min-score:
+    description: "Minimum quality score (0-100)"
+    required: false
+    default: "0"
+  fail-on-high:
+    description: "Fail workflow if high-severity issues found"
+    required: false
+    default: "false"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.github-token }}
+    - ${{ inputs.codelens-api-key }}
+    - ${{ inputs.codelens-api-url }}
+    - ${{ inputs.min-score }}
+    - ${{ inputs.fail-on-high }}
