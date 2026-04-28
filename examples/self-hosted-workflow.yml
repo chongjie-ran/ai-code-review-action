@@ -1,0 +1,28 @@
+# Example: Using CodeLens GitHub Action (recommended)
+# Just add this to your project's .github/workflows/
+
+name: CodeLens AI Code Review
+
+on:
+  pull_request:
+    branches: [main, master, develop]
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main, master]
+
+jobs:
+  codelens-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: CodeLens AI Review
+        uses: chongjie-ran/ai-code-review-action@v1.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          codelens-api-key: ${{ secrets.CODELENS_API_KEY }}
+          codelens-api-url: https://api.codelens.ai  # or your self-hosted URL
+          fail-on-high: true
+          min-score: 70
